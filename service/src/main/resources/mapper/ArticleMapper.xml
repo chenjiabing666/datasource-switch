@@ -1,0 +1,137 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vivachek.service.dao2.ArticleMapper">
+
+    <resultMap id="BaseResultMap" type="com.vivachek.core.domain.Article">
+        <result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="tag_id" jdbcType="VARCHAR" property="tagId" />
+        <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+    </resultMap>
+
+
+
+    <sql id="Base_Column_List">
+      id, title, create_time, status, update_time, user_id, tag_id, keyword,content
+</sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  delete from article
+  where id = #{id,jdbcType=VARCHAR}
+</delete>
+
+    <select id="selectAll" resultType="com.vivachek.core.domain.Article">
+        select * from article
+    </select>
+
+
+    <insert id="insert" parameterType="com.vivachek.core.domain.Article">
+  insert into article ( id, title,
+    create_time, status, update_time,
+    user_id, tag_id, keyword,
+    content)
+  values ( #{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP},
+    #{userId,jdbcType=VARCHAR}, #{tagId,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR},
+    #{content,jdbcType=VARCHAR})
+</insert>
+
+
+    <insert id="insertSelective" parameterType="com.vivachek.core.domain.Article">
+        insert into article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="tagId != null">
+                tag_id,
+            </if>
+            <if test="keyword != null">
+                keyword,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="tagId != null">
+                #{tagId,jdbcType=VARCHAR},
+            </if>
+            <if test="keyword != null">
+                #{keyword,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.vivachek.core.domain.Article">
+        update article
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="tagId != null">
+                tag_id = #{tagId,jdbcType=VARCHAR},
+            </if>
+            <if test="keyword != null">
+                keyword = #{keyword,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>
