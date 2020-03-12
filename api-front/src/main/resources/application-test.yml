@@ -6,7 +6,7 @@ server:
 spring:
   datasource1:
     username: root
-    password: Nov2014
+    password: xxx
     url: jdbc:mysql://120.26.101.207:3306/shiro?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -32,7 +32,7 @@ spring:
     connectionProperties=druid.stat.mergeSql: true;druid.stat.slowSqlMillis=5000
   datasource2:
     username: root
-    password: Nov2014
+    password: xxx
     url: jdbc:mysql://120.26.101.207:3306/shiro1?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -59,7 +59,7 @@ spring:
   redis:
     database: 2
     host: 120.26.101.207
-    password: live4dream
+    password: xxx
     jedis:
       pool:
         max-active: 8
