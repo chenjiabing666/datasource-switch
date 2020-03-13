@@ -57,6 +57,7 @@ public class DatasourceConfig {
      * @return
      */
     @Bean
+    @Primary
     public DynamicDataSource dynamicDataSource() {
         DynamicDataSource dataSource = new DynamicDataSource();
         //默认数据源，在没有切换数据源的时候使用该数据源
@@ -67,32 +68,5 @@ public class DatasourceConfig {
         //设置数据源Map，动态切换就是根据key从map中获取
         dataSource.setTargetDataSources(map);
         return dataSource;
-    }
-
-
-    /**
-     * 和Mybatis整合必须设置SqlSessionFactory的数据源为动态数据源
-     */
-    @Bean
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
-        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
-        //此处必须设置动态数据源
-        factoryBean.setDataSource(dynamicDataSource());
-        factoryBean.setVfs(SpringBootVFS.class);
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
-        configuration.setMapUnderscoreToCamelCase(true);
-        factoryBean.setConfiguration(configuration);
-        factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:/mapper/**/*.xml"));
-        return factoryBean.getObject();
-    }
-
-    /**
-     * 设置事务管理器
-     *
-     * @return
-     */
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dynamicDataSource());
     }
 }
